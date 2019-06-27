@@ -5,81 +5,147 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 namespace MD5_Hash.Controller
 {
-   public class AppController
+    internal class ConsoleSpinner
     {
-        CombinationController combinationController ;
-        Md5Controller md5Controller ;
-        SortController sortController ;
+        private int _currentAnimationFrame;
+
+        public ConsoleSpinner()
+        {
+            SpinnerAnimationFrames = new[]
+                                     {
+                                         '|',
+                                         '/',
+                                         '-',
+                                         '\\'
+                                     };
+        }
+
+        public char[] SpinnerAnimationFrames { get; set; }
+
+        public void UpdateProgress()
+        {
+            // Store the current position of the cursor
+         
+            Console.CursorVisible = false;
+
+            // Store the current position of the cursor
+            var originalX = Console.CursorLeft;
+            var originalY = Console.CursorTop;
+            // Write the next frame (character) in the spinner animation
+            Console.Write(SpinnerAnimationFrames[_currentAnimationFrame]);
+
+            // Keep looping around all the animation frames
+            _currentAnimationFrame++;
+            if (_currentAnimationFrame == SpinnerAnimationFrames.Length)
+            {
+                _currentAnimationFrame = 0;
+            }
+
+            // Restore cursor to original position
+            Console.SetCursorPosition(originalX, originalY);
+        }
+    }
+    public class AppController
+    {
+        CombinationController combinationController;
+        Md5Controller md5Controller;
+        SortController sortController;
         public string ConstText { get; set; }
         public string HashKey { get; set; }
         public int Combinations { get; set; }
         public AppController(string text, string hashKey, int combinations)
         {
-             combinationController = new CombinationController();
-             md5Controller = new Md5Controller();
-             sortController = new SortController();
-             ConstText = text;
-             HashKey = hashKey;
-             Combinations = combinations;
+            combinationController = new CombinationController();
+            md5Controller = new Md5Controller();
+            sortController = new SortController();
+            ConstText = text;
+            HashKey = hashKey;
+            Combinations = combinations;
         }
 
 
         public void Run()
         {
-            List<string> wordsList =  sortController.GenerateWordList();
+            List<string> wordsList = sortController.GenerateWordList();
 
             List<string> anagramWordList = new List<string>();
             List<int> charCount = new List<int>();
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            long count = 0;
+           
             for (int i = 0; i < 6; i++)
             {
                 charCount.Add(0);
             }
-            Console.WriteLine("Brute Forcing.....");
+
+            var s = new ConsoleSpinner();
+
+
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            Console.WriteLine("Brute Forcing.....");
             foreach (string word1 in wordsList)
             {
 
                 sortController.SortWords(word1, ConstText, anagramWordList, charCount);
             }
-            Stopwatch stopWatch = new Stopwatch();
-            stopWatch.Start();
-            long count = 0;
+            bool spinning = true;
+
+
+          
+               // simulate some work being done
+               
+          
             foreach (IEnumerable<string> i in combinationController.Combinations(anagramWordList, Combinations).AsParallel())
-            {
-                count++;
-              
-                if (string.Join(" ", i).Length == 20)
                 {
-                    using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "combinations.txt"), true))
-                    {
-                    string hashTobeCheck = md5Controller.Md5Hash(string.Join(" ", i));
-                    if (hashTobeCheck == HashKey)
-                    {
-                        outputFile.WriteLine(string.Join(" ", i));
-                        Console.WriteLine(string.Join(" ", i));
-                        outputFile.WriteLine(count);
-                        stopWatch.Stop();
 
 
-                        TimeSpan ts = stopWatch.Elapsed;
+                 
+                    s.UpdateProgress();
 
-                        // Format and display the TimeSpan value.
-                        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                            ts.Hours, ts.Minutes, ts.Seconds,
-                            ts.Milliseconds / 10);
-                        outputFile.WriteLine(elapsedTime);
-                            break;
+                    count++;
+                        using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "combinations.txt"), true))
+                        {
+                            outputFile.WriteLine(string.Join(" ", i));
+                            string hashTobeCheck = md5Controller.Md5Hash(string.Join(" ", i));
+                            if (hashTobeCheck == HashKey)
+                            {
+
+                                Console.WriteLine(string.Join(" ", i));
+                                outputFile.WriteLine(count);
+                                stopWatch.Stop();
+
+
+                                TimeSpan ts = stopWatch.Elapsed;
+
+                                // Format and display the TimeSpan value.
+                                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                                    ts.Hours, ts.Minutes, ts.Seconds,
+                                    ts.Milliseconds / 10);
+                                outputFile.WriteLine(elapsedTime);
+                                spinning = false;
+                                break;
+                            }
+                        }
                     }
-                    }
 
-                }
+                
+            
+            //stopWatch.Stop();
 
-            }
 
-         
+            //TimeSpan ts = stopWatch.Elapsed;
+
+            //// Format and display the TimeSpan value.
+            //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+            //    ts.Hours, ts.Minutes, ts.Seconds,
+            //    ts.Milliseconds / 10);
+            //Console.WriteLine(elapsedTime);
+            //Console.WriteLine(anagramWordList.Count());
             Console.ReadKey();
 
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\wmh\\source\\repos\\MD5_Hash\\MD5_Hash\\MD5_Hash.csproj": {}
+    "C:\\Users\\wmh\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\MD5_Hash.csproj": {}
   },
   "projects": {
-    "C:\\Users\\wmh\\source\\repos\\MD5_Hash\\MD5_Hash\\MD5_Hash.csproj": {
+    "C:\\Users\\wmh\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\MD5_Hash.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\wmh\\source\\repos\\MD5_Hash\\MD5_Hash\\MD5_Hash.csproj",
+        "projectUniqueName": "C:\\Users\\wmh\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\MD5_Hash.csproj",
         "projectName": "MD5_Hash",
-        "projectPath": "C:\\Users\\wmh\\source\\repos\\MD5_Hash\\MD5_Hash\\MD5_Hash.csproj",
+        "projectPath": "C:\\Users\\wmh\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\MD5_Hash.csproj",
         "packagesPath": "C:\\Users\\wmh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\wmh\\source\\repos\\MD5_Hash\\MD5_Hash\\obj\\",
+        "outputPath": "C:\\Users\\wmh\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

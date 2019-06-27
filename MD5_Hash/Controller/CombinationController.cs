@@ -38,7 +38,7 @@ namespace MD5_Hash.Controller
         {
             var elem = elements.ToArray();
             var size = elem.Length;
-
+         
             if (k > size) yield break;
 
             var numbers = new int[k];
@@ -46,10 +46,29 @@ namespace MD5_Hash.Controller
             for (var i = 0; i < k; i++)
                 numbers[i] = i;
 
+
+            var debug = numbers.Select(n => elem[n]);
+             int count1 = string.Join(" ", debug).Count(x => x == 'a');
+            //int count2 = string.Join(" ", debug).Count(x => x == 'i');
+            //int count3 = string.Join(" ", debug).Count(x => x == 'n');
+            //int count4 = string.Join(" ", debug).Count(x => x == 'w');
+            //int count5 = string.Join(" ", debug).Count(x => x == 'y');
+            //int count6 = string.Join(" ", debug).Count(x => x == 'p');
+
             do
-            {
-                yield return numbers.Select(n => elem[n]);
-            } while (NextCombination(numbers, size, k));
+             {
+                if (string.Join(" ", debug).Length == 20)
+                {
+                    yield return numbers.Select(n => elem[n]);
+                }
+                else
+                {
+                    continue;
+                }
+          
+          } while (NextCombination(numbers, size, k));
+            
+            
         }
     }
 }
