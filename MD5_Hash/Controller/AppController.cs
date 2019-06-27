@@ -87,7 +87,7 @@ namespace MD5_Hash.Controller
 
 
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            Console.WriteLine("Brute Forcing.....");
+            Console.WriteLine("Finding the secret phase.....");
             foreach (string word1 in wordsList)
             {
 
@@ -96,56 +96,50 @@ namespace MD5_Hash.Controller
             bool spinning = true;
 
 
-          
-               // simulate some work being done
-               
-          
-            foreach (IEnumerable<string> i in combinationController.Combinations(anagramWordList, Combinations).AsParallel())
+
+
+
+
+            foreach (string[] i in combinationController.CombinationsRosettaWoRecursion(anagramWordList, 3).AsParallel())
+            {
+
+
+
+                s.UpdateProgress();
+
+                count++;
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "combinations.txt"), true))
                 {
 
 
-                 
-                    s.UpdateProgress();
+                    outputFile.WriteLine(string.Join(" ", i));
+                    string hashTobeCheck = md5Controller.Md5Hash(string.Join(" ", i));
+                    if (hashTobeCheck == HashKey)
+                    {
 
-                    count++;
-                        using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "combinations.txt"), true))
-                        {
-                            outputFile.WriteLine(string.Join(" ", i));
-                            string hashTobeCheck = md5Controller.Md5Hash(string.Join(" ", i));
-                            if (hashTobeCheck == HashKey)
-                            {
-
-                                Console.WriteLine(string.Join(" ", i));
-                                outputFile.WriteLine(count);
-                                stopWatch.Stop();
+                        Console.WriteLine(string.Join(" ", i));
+                        outputFile.WriteLine(count);
+                        stopWatch.Stop();
 
 
-                                TimeSpan ts = stopWatch.Elapsed;
+                        TimeSpan ts = stopWatch.Elapsed;
 
-                                // Format and display the TimeSpan value.
-                                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                                    ts.Hours, ts.Minutes, ts.Seconds,
-                                    ts.Milliseconds / 10);
-                                outputFile.WriteLine(elapsedTime);
-                                spinning = false;
-                                break;
-                            }
-                        }
+
+                        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                            ts.Hours, ts.Minutes, ts.Seconds,
+                            ts.Milliseconds / 10);
+                        outputFile.WriteLine(elapsedTime);
+
+                        break;
                     }
 
-                
-            
-            //stopWatch.Stop();
+
+                }
+            }
 
 
-            //TimeSpan ts = stopWatch.Elapsed;
 
-            //// Format and display the TimeSpan value.
-            //string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-            //    ts.Hours, ts.Minutes, ts.Seconds,
-            //    ts.Milliseconds / 10);
-            //Console.WriteLine(elapsedTime);
-            //Console.WriteLine(anagramWordList.Count());
+
             Console.ReadKey();
 
         }
