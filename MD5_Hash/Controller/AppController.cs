@@ -89,19 +89,10 @@ namespace MD5_Hash.Controller
 
                 sortController.SortWords(word1, ConstText, anagramWordList);
             }
-        
-
-
-            //using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "combinations2134.txt"), true))
-            //{
-            //    foreach (var i in anagramWordList)
-            //    {
-            //        outputFile.WriteLine(i);
-            //    }
-            //}
 
 
 
+          
             foreach (string[] i in combinationController.CombinationsRosettaWoRecursion(anagramWordList, 3).AsParallel())
             {
 
@@ -112,8 +103,9 @@ namespace MD5_Hash.Controller
                 count++;
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "combinations.txt"), true))
                 {
+                   
 
-
+                 
                     outputFile.WriteLine(string.Join(" ", i));
                     string hashTobeCheck = md5Controller.Md5Hash(string.Join(" ", i));
                     if (hashTobeCheck == HashKey)
@@ -134,6 +126,8 @@ namespace MD5_Hash.Controller
 
                         break;
                     }
+              
+
 
 
                 }

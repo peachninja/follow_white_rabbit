@@ -688,23 +688,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\peach\\.nuget\\packages\\": {},
+    "C:\\Users\\wmh\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\peach\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\MD5_Hash.csproj",
+      "projectUniqueName": "C:\\Users\\wmh\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\MD5_Hash.csproj",
       "projectName": "MD5_Hash",
-      "projectPath": "C:\\Users\\peach\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\MD5_Hash.csproj",
-      "packagesPath": "C:\\Users\\peach\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\peach\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\obj\\",
+      "projectPath": "C:\\Users\\wmh\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\MD5_Hash.csproj",
+      "packagesPath": "C:\\Users\\wmh\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\wmh\\Documents\\GitHub\\follow_white_rabbit\\MD5_Hash\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\peach\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\wmh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

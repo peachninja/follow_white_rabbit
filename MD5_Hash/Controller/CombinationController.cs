@@ -26,8 +26,8 @@ namespace MD5_Hash.Controller
                     result[index++] = value++;
                     stack.Push(value);
                     if (index != m) continue;
-                    yield return (int[])result.Clone(); // thanks to @xanatos
-                    //yield return result;
+                    yield return (int[])result.Clone(); 
+               
                     break;
                 }
             }
@@ -37,12 +37,7 @@ namespace MD5_Hash.Controller
         {
             var array = elements.ToArray();
             string text = "poultry outwits ants";
-            char[] ch1 = text.ToLower().ToCharArray();
-            Array.Sort(ch1);
-            string val1 = new string(ch1);
-            string val2 = "";
-            char[] ch2 = val2.ToCharArray();
-            //var size = elem.Length;
+          
             if (array.Length < m)
                 throw new ArgumentException("Array length can't be less than number of selected elements");
             if (m < 1)
@@ -55,30 +50,17 @@ namespace MD5_Hash.Controller
                     result[i] = array[j[i]];
                 }
 
-                ch2 = string.Join(" ", result).ToLower().ToCharArray();
+              
+                char[] ch1 = text.ToLower().ToCharArray();
+                char[] ch2 = string.Join(" ", result).ToCharArray();
+                Array.Sort(ch1);
                 Array.Sort(ch2);
-                val2 = new string(ch2);
-                //int count1 = string.Join(" ", result).Count(x => x == 'a');
-                //int count2 = string.Join(" ", result).Count(x => x == 'i');
-                //int count3 = string.Join(" ", result).Count(x => x == 'n');
-                //int count4 = string.Join(" ", result).Count(x => x == 'w');
-                //int count5 = string.Join(" ", result).Count(x => x == 'y');
-                //int count6 = string.Join(" ", result).Count(x => x == 'p');
-                //int count9 = string.Join(" ", result).Count(x => x == 'o');
-                //int count10 = string.Join(" ", result).Count(x => x == 's');
-
-
-                //if (string.Join(" ", result).Length == 20 && !(count1 > 1 || count2 > 1 || count3 > 1 || count4 > 1 || count5 > 1 || count6 > 1 || count9 > 2 || count10 > 2))
-                //{
-                //    yield return result;
-                //}
+                string val1 = new string(ch1);
+                string val2 = new string(ch2);
                 if (val1 == val2)
                 {
                     yield return result;
                 }
-
-
-
 
             }
         }
