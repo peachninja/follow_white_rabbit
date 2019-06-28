@@ -96,7 +96,13 @@ namespace MD5_Hash.Controller
             bool spinning = true;
 
 
-
+            //using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "combinations2134.txt"), true))
+            //{
+            //    foreach (var i in anagramWordList)
+            //    {
+            //        outputFile.WriteLine(i);
+            //    }
+            //}
 
 
 
