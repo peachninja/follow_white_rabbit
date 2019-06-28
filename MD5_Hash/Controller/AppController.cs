@@ -73,16 +73,12 @@ namespace MD5_Hash.Controller
             List<string> wordsList = sortController.GenerateWordList();
 
             List<string> anagramWordList = new List<string>();
-            List<int> charCount = new List<int>();
+       
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             long count = 0;
            
-            for (int i = 0; i < 6; i++)
-            {
-                charCount.Add(0);
-            }
-
+       
             var s = new ConsoleSpinner();
 
 
@@ -91,9 +87,9 @@ namespace MD5_Hash.Controller
             foreach (string word1 in wordsList)
             {
 
-                sortController.SortWords(word1, ConstText, anagramWordList, charCount);
+                sortController.SortWords(word1, ConstText, anagramWordList);
             }
-            bool spinning = true;
+        
 
 
             //using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "combinations2134.txt"), true))

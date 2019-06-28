@@ -9,7 +9,7 @@ namespace MD5_Hash.Controller
     {
 
 
-        public  List<string> SortWords(string word1, string word2, List<string> listToAdd, List<int> charCount)
+        public  List<string> SortWords(string word1, string word2, List<string> listToAdd)
         {
 
             char[] ch1 = word1.ToLower().ToCharArray();
